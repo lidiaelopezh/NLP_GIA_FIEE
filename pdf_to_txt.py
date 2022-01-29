@@ -1,5 +1,17 @@
 #https://github.com/lidiaelopezh/NLP_GIA_FIEE.git
 
+#//////////////////////////////////////////////////////////////////////////////#
+#  Lista de librerias de apoyo
+#//////////////////////////////////////////////////////////////////////////////#
+
+import re
+import os
+from unicodedata import normalize
+import fitz
+from io import StringIO
+from os import listdir
+
+
 #/////////////////////////////////////////////////////////////////////////////////////////////#
 #  Funciones para identificar el texto presente en el PDF e etiquetar por estilos de fuentes
 #/////////////////////////////////////////////////////////////////////////////////////////////#
@@ -175,3 +187,31 @@ def headers_para(doc, size_tag, flag_tag):
                     block_string += ""
                 header_para.append(block_string)
     return header_para
+
+def convertpdf_txt(filename):
+    """
+    Convierte el archivo PDF a texto plano, procesa el texto para dividirlas por resoluciones
+    y finalmente da una lista de aquellas relacionadas a designaciones o ceses
+    :param pdf_file_path: ruta del archivo PDF
+    :param lista_palabras_a_corregir: ruta de lista de palabras adicionales a corregir
+    :param lista_palabras_de_corrección: ruta de lista de palabras adicionales de corrección
+    :return: lista de resoluciones que contienen designaciones y ceses
+    """
+    # Ingresar ruta del documento a analizar
+    doc = fitz.open(filename)
+
+    # Analizando el pdf en busqueda de tipos de fuentes y sus caracteristicas
+    font_counts, styles = fonts(doc, granularity=True)
+    # Etiquetas para el tamaño y estilo de letra
+    size_tag, flag_tag = font_tags(font_counts, styles)
+    # Etiquetas aplicadas en el texto del pdf
+    texto = headers_para(doc, size_tag, flag_tag)
+    doc.close()
+
+    txt = texto
+    txt_temp = []
+    
+    for line in txt:
+      if line != '':
+        txt_temp.append(line)
+    return txt_temp
