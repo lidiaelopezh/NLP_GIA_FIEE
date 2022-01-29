@@ -200,6 +200,7 @@ def convertpdf_txt(filename):
     """
     # Ingresar ruta del documento a analizar
     doc = fitz.open(filename)
+    fitz.TOOLS.mupdf_display_errors(value=None)
 
     # Analizando el pdf en busqueda de tipos de fuentes y sus caracteristicas
     font_counts, styles = fonts(doc, granularity=True)
