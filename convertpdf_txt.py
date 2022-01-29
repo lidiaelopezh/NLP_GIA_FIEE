@@ -17,23 +17,23 @@ from os import listdir
 #  Funciones para identificar el texto presente en el PDF e etiquetar por estilos de fuentes
 #/////////////////////////////////////////////////////////////////////////////////////////////#
 
-def itemgetter(*items):
-    """
-    Devuelve un objeto invocable que obtiene un elemento de su operando
-    utilizando el método _getitem_() del operando. Si se especifican varios
-    elementos, devuelve una tupla de valores de búsqueda.
-    :param items: índice del elemento a invocar
-    :return: elemento invocado
-    """
-    if len(items) == 1:
-        item = items[0]
+# def itemgetter(*items):
+#     """
+#     Devuelve un objeto invocable que obtiene un elemento de su operando
+#     utilizando el método _getitem_() del operando. Si se especifican varios
+#     elementos, devuelve una tupla de valores de búsqueda.
+#     :param items: índice del elemento a invocar
+#     :return: elemento invocado
+#     """
+#     if len(items) == 1:
+#         item = items[0]
 
-        def g(obj):
-            return obj[item]
-    else:
-        def g(obj):
-            return tuple(obj[item] for item in items)
-    return g
+#         def g(obj):
+#             return obj[item]
+#     else:
+#         def g(obj):
+#             return tuple(obj[item] for item in items)
+#     return g
 
 
 def fonts(doc, granularity=True):
