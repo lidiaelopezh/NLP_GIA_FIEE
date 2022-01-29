@@ -56,7 +56,7 @@ def fonts(doc, granularity=True):
 
     for i in range(pages):
         page = doc.loadPage(i)
-        blocks = page.getText("dict")["blocks"]
+        blocks = page.get_Text("dict")["blocks"]
         for b in blocks:  # iterate through the text blocks
             if b['type'] == 0:  # bloque con type = 0 contiene texto
                 for l in b["lines"]:  # lista de lineas de texto
@@ -157,7 +157,7 @@ def headers_para(doc, size_tag, flag_tag):
     previous_s = {}
     for i in range(pages):
         page = doc.loadPage(i)
-        blocks = page.getText("dict")["blocks"]
+        blocks = page.get_Text("dict")["blocks"]
         for b in blocks:  # itera a través de los bloques de texto
             if b['type'] == 0:  # en este caso el bloque contiene texto
                 block_string = ""  # texto encontrado en el bloque
